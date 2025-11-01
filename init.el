@@ -101,6 +101,7 @@
   :after ivy
   :config
   (counsel-mode 1))  ;; enables all counsel commands globally
+
 ;; remap C-x C-f to use counsel-findfile and 
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)             ;; extra shortcut
 (global-set-key (kbd "C-c g") 'counsel-git)                     ;; find files in a git repo
@@ -126,9 +127,35 @@
 (setq vterm-shell "/bin/zsh")
 (setq vterm-term-environment-variable "xterm-256color")
 
+;; Set leader key
+(use-package general
+  :ensure t
+  :config
+  (general-create-definer my-leader-def
+		:states '(normal visual emacs)      ;; which state states SPC works
+    :prefix "SPC"))
+
+;; <leader>ff for find-file
+(my-leader-def
+  "f"  '(:ignore t :which-key "file")  ;; prefix for file commands
+  "ff" '(counsel-find-file :which-key "find file"))
+
 ;; to use gcc and gc to comment a line or selected text
 (use-package evil-commentary
   :after evil
   :ensure t
   :config
   (evil-commentary-mode))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+	 '(counsel evil-commentary general ir-black-theme magit vterm)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
