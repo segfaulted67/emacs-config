@@ -1,0 +1,14 @@
+# Emacs backups
+*~
+\#*\#
+.auto-save-list/
+
+# Packages
+elpa/
+
+# Native compilation
+eln-cache/
+
+# Optional
+*.log
+*.swp
