@@ -57,8 +57,24 @@
 	(add-hook 'vterm-mode-hook (lambda () (evil-local-mode -1))))
 
 ;; Switch buffers using [b and [b
-(define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-(define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+;; (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
+;; (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+	 '(all-the-icons-ivy counsel doom-modeline evil-commentary general
+											 ir-black-theme ivy-rich magit nerd-icons-dired
+											 vterm)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -78,7 +94,9 @@
 ;; which key
 (use-package which-key
   :config
-  (which-key-mode))
+	(setq which-key-idle-delay 0.1)
+  (which-key-mode)
+  (which-key-setup-side-window-bottom))
 
 ;; ivy mode
 (use-package ivy
@@ -102,6 +120,17 @@
   :after ivy
   :config
   (counsel-mode 1))  ;; enables all counsel commands globally
+;; ivy-rch
+(use-package ivy-rich
+  :after counsel
+  :init
+  (ivy-rich-mode 1))
+(use-package all-the-icons
+  :ensure t)
+(use-package all-the-icons-ivy
+  :after ivy-rich
+  :init
+  (all-the-icons-ivy-setup))
 
 ;; remap C-x C-f to use counsel-findfile and 
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)             ;; extra shortcut
@@ -134,7 +163,16 @@
   :config
   (general-create-definer my-leader-def
 		:states '(normal visual emacs)      ;; which state states SPC works
-    :prefix "SPC"))
+    :prefix "SPC")
+	(general-define-key
+		:states 'normal
+		:prefix "]"
+		"b" 'next-buffer)
+		(general-define-key
+		:states 'normal
+		:prefix "["
+		"b" 'previous-buffer))
+
 
 ;; <leader>ff for find-file
 (my-leader-def
@@ -147,16 +185,15 @@
   :ensure t
   :config
   (evil-commentary-mode))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-	 '(counsel evil-commentary general ir-black-theme magit vterm)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+(setq doom-modeline-icon t
+      doom-modeline-major-mode-icon t
+      doom-modeline-minor-modes nil) ;; hide minor modes if you like
+
+(use-package nerd-icons)
+(use-package nerd-icons-dired
+	:ensure t
+  :hook (dired-mode . nerd-icons-dired-mode))
