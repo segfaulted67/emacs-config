@@ -1,3 +1,5 @@
+(setq custom-file (make-temp-file "emacs-custom"))
+
 (setq inhibit-startup-message t)
 
 
@@ -9,7 +11,7 @@
 (tooltip-mode 0)
 (menu-bar-mode 0)
 
-(set-face-attribute 'default nil :font "CaskaydiaCove NF" :height 100)
+(set-face-attribute 'default nil :font "CaskaydiaCove NF" :height 110)
 
 (setq make-backup-files nil)  ;; stop creating backup~ files
 
@@ -56,25 +58,12 @@
 	;; Disable Evil in vterm buffers
 	(add-hook 'vterm-mode-hook (lambda () (evil-local-mode -1))))
 
-;; Switch buffers using [b and [b
-;; (define-key evil-normal-state-map (kbd "]b") 'next-buffer)
-;; (define-key evil-normal-state-map (kbd "[b") 'previous-buffer)
+;; vim surround type shi
+(use-package evil-surround
+  :after evil
+  :config
+  (global-evil-surround-mode 1))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-	 '(all-the-icons-ivy counsel doom-modeline evil-commentary general
-											 ir-black-theme ivy-rich magit nerd-icons-dired
-											 vterm)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -89,7 +78,7 @@
 
 ;; Remap TAB in insert mode to indent
 (define-key evil-insert-state-map (kbd "TAB") 'my-global-insert-tab)
-(electric-indent-mode -1)
+(electric-indent-mode 1)
 
 ;; which key
 (use-package which-key
