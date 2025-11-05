@@ -80,4 +80,3 @@ This configuration is designed for:
 * Screenshot
 - [[./screenshots/scratch.png]]
 - [[./screenshots/emacs-config.png]]
-- [[./screenshots/emacs.png]]
