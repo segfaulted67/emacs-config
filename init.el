@@ -215,3 +215,22 @@
 
 (use-package counsel-projectile
 	:config  (counsel-projectile-mode))
+
+;; Org mode plugins
+(use-package org
+	:config
+	(setq org-startup-indented t
+				org-hide-emphasis-markers t))
+
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode))
+
+(use-package org-modern
+  :hook (org-mode . org-modern-mode))
+
+(use-package org-appear
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-autoemphasis t
+        org-appear-autolinks t))
+
