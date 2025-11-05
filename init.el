@@ -40,6 +40,8 @@
 (use-package evil
   :ensure t
   :init
+	(setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
   ;; Block cursor in all modes, default color
@@ -57,6 +59,13 @@
 
 	;; Disable Evil in vterm buffers
 	(add-hook 'vterm-mode-hook (lambda () (evil-local-mode -1))))
+
+;; evil collection
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 ;; vim surround type shi
 (use-package evil-surround
@@ -125,11 +134,12 @@
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)             ;; extra shortcut
 (global-set-key (kbd "C-c g") 'counsel-git)                     ;; find files in a git repo
 (global-set-key (kbd "M-x") 'counsel-M-x)                       ;; use ivy for M-x
-(global-set-key (kbd "C-c b") 'counsel-switch-buffer)           ;; use ivy for M-x
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)           ;; use ivy for M-x
 
 ;; git wraper
 (use-package magit
   :bind ("C-x g" . magit-status))
+
 
 ;; colorscheme
 (use-package ir-black-theme
@@ -166,7 +176,7 @@
 ;; <leader>ff for find-file
 (my-leader-def
   "f"  '(:ignore t :which-key "file")  ;; prefix for file commands
-  "ff" '(counsel-find-file :which-key "find file"))
+  "ff" '(projectile-find-file :which-key "find file"))
 
 ;; to use gcc and gc to comment a line or selected text
 (use-package evil-commentary
@@ -186,3 +196,22 @@
 (use-package nerd-icons-dired
 	:ensure t
   :hook (dired-mode . nerd-icons-dired-mode))
+
+(use-package evil-mc)
+(global-evil-mc-mode 1)
+(with-eval-after-load 'evil-mc
+  (define-key evil-mc-key-map (kbd "<escape>") 'evil-mc-undo-all-cursors))
+
+(use-package projectile
+	:diminish projectile-mode
+	:config (projectile-mode)
+	:custom ((projectile-completion-system 'ivy))
+	:bind-keymap
+	("C-c p" . projectile-command-map)
+	:init
+	(when (file-directory-p "~/projects")
+		(setq projectile-project-search-path '("~/projects")))
+	(setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+	:config  (counsel-projectile-mode))

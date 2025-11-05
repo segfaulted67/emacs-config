@@ -2,7 +2,11 @@
 *~
 \#*\#
 .auto-save-list/
-.transient/
+transient/
+projects
+projectile-bookmarks.eld
+.mc-lists.el
+
 
 # Packages
 elpa/
