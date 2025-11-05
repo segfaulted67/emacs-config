@@ -1,2 +1,83 @@
 
+* Emacs Configuration Overview
 
+This Emacs configuration focuses on a clean UI, Vim-style editing, modern completion frameworks, and enhanced project/org workflows.
+
+** General Settings
+- Temporary `custom-file` to avoid cluttering configuration.
+- Disables backup files.
+- Line numbers enabled (absolute).
+- Escape key (`ESC`) quits prompts globally.
+
+** User Interface Tweaks
+- Font: CaskaydiaCove NF, size 11pt.
+- Doom modeline with icons enabled.
+- Theme: `ir-black-theme`.
+
+** Package Management
+- Uses `package` and `use-package` with MELPA, MELPA Stable, Org, and ELPA archives.
+- `use-package-always-ensure` ensures packages are installed automatically.
+
+** Editing Enhancements
+- **Evil Mode** for Vim keybindings
+  - Block cursor in all modes
+  - Disabled in `vterm` buffers
+- **Evil Collection**: integrates Evil with built-in modes
+- **Evil Surround**: emulate Vim's `surround` functionality
+- **Evil Commentary**: comment lines/regions using `gcc`/`gc`
+- Tab settings:
+  - Tab width = 2 spaces
+  - Global TAB in insert mode inserts 2 spaces
+
+** Completion and Navigation
+- **Ivy**, **Counsel**, **Ivy-rich**, and **All-the-icons-ivy**
+  - `C-s` for `swiper`
+  - `C-x C-f` for `counsel-find-file`
+  - `C-c g` for `counsel-git`
+  - `M-x` replaced by `counsel-M-x`
+  - Buffer switching with `C-x b`
+- **Which-key** shows available keybindings after delay (0.1s)
+- **Projectile** + **Counsel-projectile** for project management
+- Leader key (`SPC`) bindings for file navigation and buffer switching
+  - `SPC f ff` → find file in project
+  - `] b` → next buffer
+  - `[ b` → previous buffer
+
+** Terminal
+- **Vterm** for a fully-featured terminal
+  - Max scrollback: 10,000 lines
+  - Default shell: `/bin/zsh`
+  - Terminal emulation: `xterm-256color`
+  - Keybinding: `C-c t` → open vterm
+
+** Version Control
+- **Magit** for Git integration (`C-x g` → `magit-status`)
+
+** Icons
+- **All-the-icons**, **Nerd-icons**, **Nerd-icons-dired**
+  - Enhanced visual icons for UI and Dired
+
+** Multiple Cursors
+- **Evil-mc** for multiple cursors
+  - `ESC` undoes all cursors
+
+** Org Mode Enhancements
+- **Org Modern** and **Org Superstar** for modern visuals
+- **Org Appear** for inline emphasis and link visibility
+- Startup options:
+  - `org-startup-indented`
+  - `org-hide-emphasis-markers`
+
+** Summary
+This configuration is designed for:
+- Efficient Vim-style editing
+- Smooth navigation with Ivy and Projectile
+- Modern org-mode experience
+- Visual cleanliness and minimal distraction
+- Integrated Git and terminal workflows
+
+
+* Screenshot
+- [[./screenshots/scratch.png]]
+- [[./screenshots/emacs-config.png]]
+- [[./screenshots/emacs.png]]
