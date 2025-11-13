@@ -17,6 +17,7 @@
 
 (setq display-line-numbers-type 'absolute)
 (global-display-line-numbers-mode 1)
+(add-hook 'dashboard-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -74,9 +75,11 @@
   (global-evil-surround-mode 1))
 
 
-;; (setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq-default evil-shift-width 2)
+
+(setq rust-indent-offset 2)
 
 ;; Global TAB in insert mode inserts 2 spaces
 (defun my-global-insert-tab ()
@@ -84,6 +87,9 @@
   (interactive)
 
   (insert (make-string evil-shift-width ?\s)))
+
+;; Enable ANSI color in compilation buffers
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
 
 ;; Remap TAB in insert mode to indent
 (define-key evil-insert-state-map (kbd "TAB") 'my-global-insert-tab)
@@ -126,9 +132,9 @@
 (use-package all-the-icons
   :ensure t)
 (use-package all-the-icons-ivy
-  :after ivy-rich
-  :init
-  (all-the-icons-ivy-setup))
+  :after ivy-rich)
+  ;; :init
+  ;; (all-the-icons-ivy-setup))
 
 ;; remap C-x C-f to use counsel-findfile and 
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)             ;; extra shortcut
@@ -264,6 +270,20 @@
   :ensure t
   :config
   (nyan-mode 1)
-  (setq nyan-animate-nyancat t)  ;; animated
-  ;; Optional: put Nyan cat in the right position
+  (setq nyan-animate-nyancat t)  
   (setq nyan-bar-length 15))
+
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook))
+;; (setq dashboard-startup-banner "[PATH]")
+(setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
+(setq dashboard-banner-logo-title "Welcome to Emacs")
+(setq dashboard-center-content t)
+(setq dashboard-vertically-center-content t)
+(setq dashboard-show-shortcuts nil)
+(setq dashboard-items '())
+(setq dashboard-icon-type 'all-the-icons)  ; use `all-the-icons' package
+(setq dashboard-display-icons-p t)     ; display icons on both GUI and terminal
+(setq dashboard-icon-type 'nerd-icons) ; use `nerd-icons' package
