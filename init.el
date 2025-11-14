@@ -61,19 +61,6 @@
 	;; Disable Evil in vterm buffers
 	(add-hook 'vterm-mode-hook (lambda () (evil-local-mode -1))))
 
-;; evil collection
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
-;; vim surround type shi
-(use-package evil-surround
-  :after evil
-  :config
-  (global-evil-surround-mode 1))
-
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
