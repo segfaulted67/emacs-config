@@ -127,7 +127,7 @@
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)             ;; extra shortcut
 (global-set-key (kbd "C-c g") 'counsel-git)                     ;; find files in a git repo
 (global-set-key (kbd "M-x") 'counsel-M-x)                       ;; use ivy for M-x
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)           ;; use ivy for M-x
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)           ;; use ivy for C-x b
 
 ;; git wraper
 (use-package magit
