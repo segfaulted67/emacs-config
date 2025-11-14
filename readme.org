@@ -1,7 +1,12 @@
 
+* Screenshot
+- [[./screenshots/scratch.png]]
+- [[./screenshots/emacs-config.png]]
+
 * Emacs Configuration Overview
 
 This Emacs configuration focuses on a clean UI, Vim-style editing, modern completion frameworks, and enhanced project/org workflows.
+
 
 ** General Settings
 - Line numbers enabled (absolute).
@@ -63,6 +68,3 @@ This configuration is designed for:
 - Integrated Git and terminal workflows
 
 
-* Screenshot
-- [[./screenshots/scratch.png]]
-- [[./screenshots/emacs-config.png]]
